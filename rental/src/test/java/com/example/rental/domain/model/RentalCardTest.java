@@ -1,7 +1,7 @@
 package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.Item;
-import com.example.rental.domain.model.vo.Member;
+import com.example.rental.domain.model.vo.User;
 import com.example.rental.domain.model.vo.RentStatus;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +13,8 @@ class RentalCardTest {
     @Test
     void rent() {
         // given
-        Member member = new Member(1L, "test-member");
-        RentalCard rentalCard = RentalCard.create(member);
+        User user = new User(1L, "test-user");
+        RentalCard rentalCard = RentalCard.create(user);
         Item item1 = new Item(1000L, "test-item1");
         Item item2 = new Item(1001L, "test-item2");
 
@@ -29,8 +29,8 @@ class RentalCardTest {
     @Test
     void submit() {
         // given
-        Member member = new Member(1L, "test-member");
-        RentalCard rentalCard = RentalCard.create(member);
+        User user = new User(1L, "test-user");
+        RentalCard rentalCard = RentalCard.create(user);
         Item item1 = new Item(1000L, "test-item1");
         Item item2 = new Item(1001L, "test-item2");
 
@@ -46,8 +46,8 @@ class RentalCardTest {
     @Test
     void overdue_submit() {
         // given
-        Member member = new Member(1L, "test-member");
-        RentalCard rentalCard = RentalCard.create(member);
+        User user = new User(1L, "test-user");
+        RentalCard rentalCard = RentalCard.create(user);
         Item item1 = new Item(1000L, "test-item1");
 
         // when
@@ -61,8 +61,8 @@ class RentalCardTest {
     @Test
     void configure_overdue() {
         // given
-        Member member = new Member(1L, "test-member");
-        RentalCard rentalCard = RentalCard.create(member);
+        User user = new User(1L, "test-user");
+        RentalCard rentalCard = RentalCard.create(user);
         Item item1 = new Item(1000L, "test-item1");
         Item item2 = new Item(1001L, "test-item2");
 

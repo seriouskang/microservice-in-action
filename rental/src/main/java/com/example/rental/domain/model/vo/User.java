@@ -3,7 +3,7 @@ package com.example.rental.domain.model.vo;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class Member {
+public class User {
     private final Long id;
     private final String name;
 

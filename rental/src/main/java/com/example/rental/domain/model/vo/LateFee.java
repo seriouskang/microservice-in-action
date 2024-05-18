@@ -2,11 +2,9 @@ package com.example.rental.domain.model.vo;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class LateFee {
-    @Getter
     private Long point;
 
     public static LateFee create() {
@@ -30,5 +28,9 @@ public class LateFee {
 
     public boolean isNormalStatus() {
         return point>=0;
+    }
+
+    public Long point() {
+        return point;
     }
 }

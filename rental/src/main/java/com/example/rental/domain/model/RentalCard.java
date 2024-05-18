@@ -14,16 +14,16 @@ import static com.example.rental.domain.model.vo.RentStatus.*;
 @Slf4j
 public class RentalCard {
     private final RentalCardId rentalCardId;
-    private final Member member;
+    private final User user;
     @Getter
     private RentStatus status;
     private LateFee lateFee;
     private RentalItems rentalItems;
     private SubmitItems submitItems;
 
-    private RentalCard(RentalCardId rentalCardId, Member member, RentStatus status, LateFee lateFee) {
+    private RentalCard(RentalCardId rentalCardId, User user, RentStatus status, LateFee lateFee) {
         this.rentalCardId = rentalCardId;
-        this.member = member;
+        this.user = user;
         this.status = status;
         this.lateFee = lateFee;
         this.rentalItems = new RentalItems();
@@ -40,12 +40,12 @@ public class RentalCard {
         return rentalCardId.id();
     }
 
-    public long memberId() {
-        return member.id();
+    public long userId() {
+        return user.id();
     }
 
-    public String memberName() {
-        return member.name();
+    public String userName() {
+        return user.name();
     }
 
     public RentStatus rentStatus() {
@@ -55,10 +55,10 @@ public class RentalCard {
     /**
      * Create RentalCard
      */
-    public static RentalCard create(Member member) {
+    public static RentalCard create(User user) {
         return new RentalCard(
                 RentalCardId.create(),
-                member,
+                user,
                 RENT_AVAILABLE,
                 LateFee.create()
         );
@@ -79,7 +79,7 @@ public class RentalCard {
     }
 
     public long point() {
-        return lateFee.getPoint();
+        return lateFee.point();
     }
 
     // @TODO: validate expectedReturnDate
@@ -101,7 +101,7 @@ public class RentalCard {
             log.info("status is not change");
         }
 
-        return lateFee.getPoint();
+        return lateFee.point();
     }
 
     public int rentalCount() {
