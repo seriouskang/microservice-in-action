@@ -55,11 +55,15 @@ public class RentalCard {
     }
 
     public RentalCard submit(Item item, LocalDate submitDate) {
-        lateFee.addPoint(rentalItems.latePointOf(item, submitDate));
+        lateFee = lateFee.addPoint(rentalItems.latePointOf(item, submitDate));
         RentalItem submitted = rentalItems.remove(item);
         submitItems.add(submitted);
 
         return this;
+    }
+
+    public long point() {
+        return lateFee.getPoint();
     }
 
     // @TODO: validate expectedReturnDate

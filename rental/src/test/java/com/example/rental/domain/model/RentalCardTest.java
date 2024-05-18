@@ -44,6 +44,21 @@ class RentalCardTest {
     }
 
     @Test
+    void overdue_submit() {
+        // given
+        Member member = new Member(1L, "test-member");
+        RentalCard rentalCard = RentalCard.create(member);
+        Item item1 = new Item(1000L, "test-item1");
+
+        // when
+        rentalCard.rent(item1);
+        rentalCard.submit(item1, LocalDate.now().plusDays(15));
+
+        // then
+        assertThat(rentalCard.point()).isEqualTo(10);
+    }
+
+    @Test
     void configure_overdue() {
         // given
         Member member = new Member(1L, "test-member");
