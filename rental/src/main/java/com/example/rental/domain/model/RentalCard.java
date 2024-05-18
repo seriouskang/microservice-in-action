@@ -2,8 +2,7 @@ package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 import static com.example.rental.domain.model.vo.RentStatus.*;
 
@@ -16,7 +15,7 @@ public class RentalCard {
     private RentStatus status;
     private LateFee lateFee;
     private RentalItems rentalItems;
-    private List<ReturnItem> returnItems = new ArrayList<>();
+    private SubmitItems submitItems;
 
     private RentalCard(RentalCardId rentalCardId, Member member, RentStatus status, LateFee lateFee) {
         this.rentalCardId = rentalCardId;
@@ -24,11 +23,7 @@ public class RentalCard {
         this.status = status;
         this.lateFee = lateFee;
         this.rentalItems = new RentalItems();
-    }
-
-    private void addReturnItem(RentalItem item) {
-//        rentalItems.remove(item);
-        returnItems.add(ReturnItem.create(item));
+        this.submitItems = new SubmitItems();
     }
 
     private void validateStatus() {
@@ -39,7 +34,6 @@ public class RentalCard {
 
     /**
      * Create RentalCard
-     * @param member
      */
     public static RentalCard create(Member member) {
         return new RentalCard(
@@ -50,9 +44,17 @@ public class RentalCard {
         );
     }
 
-    public RentalCard rentItem(Item item) {
+    public RentalCard rent(Item item) {
         validateStatus();
-        rentalItems.rentalItem(item);
+        rentalItems.rent(item);
+        return this;
+    }
+
+    public RentalCard submit(Item item, LocalDate submitDate) {
+        lateFee.addPoint(rentalItems.latePointOf(item, submitDate));
+        RentalItem submitted = rentalItems.remove(item);
+        submitItems.add(submitted);
+
         return this;
     }
 }

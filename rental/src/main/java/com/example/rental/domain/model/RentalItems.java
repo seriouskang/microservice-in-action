@@ -2,6 +2,7 @@ package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.Item;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,36 @@ public class RentalItems {
         rentalItems.add(RentalItem.create(item));
     }
 
+    private void removeItem(RentalItem item) {
+        rentalItems.remove(item);
+    }
+
     private void validateStatus() {
         if(rentalItems.size() > MAX_RENTAL_COUNT) {
             throw new IllegalStateException("Exceed maximum number of rentals");
         }
     }
 
-    public void rentalItem(Item item) {
+    private RentalItem rentalItemOf(Item item) {
+        return rentalItems.stream()
+                .filter(i -> i.item().equals(item))
+                .findFirst()
+                .get();
+    }
+
+    public void rent(Item item) {
         validateStatus();
         addItem(item);
+    }
+
+    public Long latePointOf(Item item, LocalDate submitDate) {
+        return rentalItemOf(item)
+                .calculateFee(submitDate);
+    }
+
+    public RentalItem remove(Item item) {
+        RentalItem rentalItem = rentalItemOf(item);
+        removeItem(rentalItem);
+        return rentalItem;
     }
 }

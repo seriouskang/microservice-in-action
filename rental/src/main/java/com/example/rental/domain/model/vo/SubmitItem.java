@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDate;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class ReturnItem {
+public class SubmitItem {
     private final RentalItem item;
     private final LocalDate returnDate;
 
-    public static ReturnItem create(RentalItem item) {
-        return new ReturnItem(item, LocalDate.now());
+    public static SubmitItem create(RentalItem item) {
+        return new SubmitItem(item, LocalDate.now());
     }
 }

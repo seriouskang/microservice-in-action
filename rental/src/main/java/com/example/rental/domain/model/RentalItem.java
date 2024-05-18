@@ -5,10 +5,12 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalItem {
     private static final long RENTAL_DATE = 14;
+    private static final long POINT_UNIT = 10;
 
     private final Item item;
     private final LocalDate rentalDate;
@@ -21,5 +23,17 @@ public class RentalItem {
 
     private static LocalDate createExpectedReturnDate() {
         return LocalDate.now().plusDays(RENTAL_DATE);
+    }
+
+    public Item item() {
+        return item;
+    }
+
+    public long calculateFee(LocalDate submitDate) {
+        if(submitDate.isAfter(expectedReturnDate)) {
+            return Period.between(expectedReturnDate, submitDate).getDays() * POINT_UNIT;
+        }
+
+        return 0L;
     }
 }
