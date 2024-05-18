@@ -1,6 +1,7 @@
 package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 
@@ -9,6 +10,7 @@ import static com.example.rental.domain.model.vo.RentStatus.*;
 /**
  * Aggregate
  */
+@Slf4j
 public class RentalCard {
     private final RentalCardId rentalCardId;
     private final Member member;
@@ -26,7 +28,7 @@ public class RentalCard {
         this.submitItems = new SubmitItems();
     }
 
-    private void validateStatus() {
+    private void validateRentStatus() {
         if(status.equals(RENT_UNAVAILABLE)) {
             throw new IllegalArgumentException("Unavailable for rental");
         }
@@ -45,7 +47,7 @@ public class RentalCard {
     }
 
     public RentalCard rent(Item item) {
-        validateStatus();
+        validateRentStatus();
         rentalItems.rent(item);
         return this;
     }
@@ -64,5 +66,26 @@ public class RentalCard {
         status = RENT_UNAVAILABLE;
 
         return this;
+    }
+
+    public Long changeStatus(long point) {
+        validateChangeStatus(point);
+        lateFee.deductPoint(point);
+
+        if(lateFee.isNormalStatus()) {
+            log.info("change status to available");
+            status = RENT_AVAILABLE;
+        } else {
+            log.info("status is not change");
+        }
+
+        return lateFee.getPoint();
+    }
+
+    private void validateChangeStatus(long point) {
+        if(rentalItems.rentalCount() > 0) {
+            throw new IllegalStateException("Have items to rent");
+        }
+        lateFee.validatePoint(point);
     }
 }

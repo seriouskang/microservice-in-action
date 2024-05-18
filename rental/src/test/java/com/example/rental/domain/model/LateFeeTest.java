@@ -12,7 +12,7 @@ class LateFeeTest {
         lateFee.addPoint(1000L);
 
         // when, then
-        Assertions.assertThatThrownBy(() -> lateFee.removePoint(1100L))
+        Assertions.assertThatThrownBy(() -> lateFee.deductPoint(1100L))
                 .isInstanceOf(Exception.class)
                 .hasMessage("Points isn't enough");
     }

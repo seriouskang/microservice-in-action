@@ -35,6 +35,10 @@ public class RentalItems {
                 .get();
     }
 
+    public int rentalCount() {
+        return rentalItems.size();
+    }
+
     public void configOverdue(Item item) {
         rentalItemOf(item).changeOverdued(true);
     }

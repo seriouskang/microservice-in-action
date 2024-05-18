@@ -2,9 +2,11 @@ package com.example.rental.domain.model.vo;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class LateFee {
+    @Getter
     private Long point;
 
     public static LateFee create() {
@@ -15,14 +17,18 @@ public class LateFee {
         return new LateFee(this.point + point);
     }
 
-    public LateFee removePoint(long point) throws Exception {
+    public LateFee deductPoint(long point) {
         validatePoint(point);
         return new LateFee(this.point - point);
     }
 
-    private void validatePoint(long point) throws Exception {
+    public void validatePoint(long point) throws IllegalStateException {
         if(this.point < point) {
-            throw new Exception("Points isn't enough");
+            throw new IllegalStateException("Points isn't enough");
         }
+    }
+
+    public boolean isNormalStatus() {
+        return point>=0;
     }
 }
