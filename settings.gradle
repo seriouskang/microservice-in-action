@@ -1,1 +1,3 @@
 rootProject.name = 'microservice-in-action'
+
+include 'rental'
