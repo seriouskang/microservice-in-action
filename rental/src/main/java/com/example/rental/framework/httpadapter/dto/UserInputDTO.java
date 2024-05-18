@@ -4,6 +4,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class UserInputDTO {
-    public final long id;
-    public final String name;
+    private final long id;
+    private final String name;
 }
