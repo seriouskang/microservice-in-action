@@ -36,6 +36,22 @@ public class RentalCard {
         }
     }
 
+    public String rentalCardId() {
+        return rentalCardId.id();
+    }
+
+    public long memberId() {
+        return member.id();
+    }
+
+    public String memberName() {
+        return member.name();
+    }
+
+    public RentStatus rentStatus() {
+        return status;
+    }
+
     /**
      * Create RentalCard
      */
@@ -90,6 +106,14 @@ public class RentalCard {
 
     public int rentalCount() {
         return rentalItems.rentalCount();
+    }
+
+    public int submitCount() {
+        return submitItems.submitCount();
+    }
+
+    public long overduedCount() {
+        return rentalItems.overduedCount();
     }
 
     private void validateChangeStatus(long point) {

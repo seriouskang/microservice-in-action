@@ -40,4 +40,8 @@ public class RentalItem {
     public void changeOverdued(boolean overdued) {
         this.overdued = overdued;
     }
+
+    public boolean overdued() {
+        return overdued;
+    }
 }

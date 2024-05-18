@@ -48,6 +48,12 @@ public class RentalItems {
         addItem(item);
     }
 
+    public long overduedCount() {
+        return rentalItems.stream()
+                .filter(RentalItem::overdued)
+                .count();
+    }
+
     public Long latePointOf(Item item, LocalDate submitDate) {
         return rentalItemOf(item)
                 .calculateFee(submitDate);

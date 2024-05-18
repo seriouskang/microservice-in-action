@@ -19,4 +19,8 @@ public class SubmitItems {
     public void add(RentalItem item) {
         addSubmitItem(item);
     }
+
+    public int submitCount() {
+        return submitItems.size();
+    }
 }

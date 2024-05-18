@@ -19,4 +19,8 @@ public class RentalCardId {
                 "-" +
                 UUID.randomUUID();
     }
+
+    public String id() {
+        return id;
+    }
 }
