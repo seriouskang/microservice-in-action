@@ -1,6 +1,7 @@
 package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.*;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import static com.example.rental.domain.model.vo.RentStatus.*;
 public class RentalCard {
     private final RentalCardId rentalCardId;
     private final Member member;
+    @Getter
     private RentStatus status;
     private LateFee lateFee;
     private RentalItems rentalItems;
@@ -30,7 +32,7 @@ public class RentalCard {
 
     private void validateRentStatus() {
         if(status.equals(RENT_UNAVAILABLE)) {
-            throw new IllegalArgumentException("Unavailable for rental");
+            throw new IllegalStateException("Unavailable for rental");
         }
     }
 
@@ -80,6 +82,10 @@ public class RentalCard {
         }
 
         return lateFee.getPoint();
+    }
+
+    public int rentalCount() {
+        return rentalItems.rentalCount();
     }
 
     private void validateChangeStatus(long point) {
