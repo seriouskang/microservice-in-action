@@ -35,6 +35,10 @@ public class RentalItems {
                 .get();
     }
 
+    public void configOverdue(Item item) {
+        rentalItemOf(item).changeOverdued(true);
+    }
+
     public void rent(Item item) {
         validateStatus();
         addItem(item);

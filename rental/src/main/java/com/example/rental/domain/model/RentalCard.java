@@ -57,4 +57,12 @@ public class RentalCard {
 
         return this;
     }
+
+    // @TODO: validate expectedReturnDate
+    public RentalCard configOverdue(Item item) {
+        rentalItems.configOverdue(item);
+        status = RENT_UNAVAILABLE;
+
+        return this;
+    }
 }

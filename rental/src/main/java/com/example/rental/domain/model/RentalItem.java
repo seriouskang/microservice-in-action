@@ -2,12 +2,12 @@ package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.Item;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalItem {
     private static final long RENTAL_DATE = 14;
     private static final long POINT_UNIT = 10;
@@ -15,7 +15,7 @@ public class RentalItem {
     private final Item item;
     private final LocalDate rentalDate;
     private final LocalDate expectedReturnDate;
-    private final boolean overdued;
+    private boolean overdued;
 
     public static RentalItem create(Item item) {
         return new RentalItem(item, LocalDate.now(), createExpectedReturnDate(), false);
@@ -35,5 +35,9 @@ public class RentalItem {
         }
 
         return 0L;
+    }
+
+    public void changeOverdued(boolean overdued) {
+        this.overdued = overdued;
     }
 }
