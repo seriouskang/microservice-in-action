@@ -7,30 +7,52 @@ import java.util.List;
 
 import static com.example.rental.domain.model.vo.RentStatus.*;
 
+/**
+ * Aggregate
+ */
 public class RentalCard {
     private final RentalCardId rentalCardId;
     private final Member member;
     private RentStatus status;
     private LateFee lateFee;
-    private List<RentalItem> rentalItems = new ArrayList<>();
+    private RentalItems rentalItems;
     private List<ReturnItem> returnItems = new ArrayList<>();
 
-    private RentalCard(RentalCardId rentalCardId, Member member, RentStatus status) {
+    private RentalCard(RentalCardId rentalCardId, Member member, RentStatus status, LateFee lateFee) {
         this.rentalCardId = rentalCardId;
         this.member = member;
         this.status = status;
+        this.lateFee = lateFee;
+        this.rentalItems = new RentalItems();
     }
 
-    public static RentalCard create(RentalCardId rentalCardId, Member member) {
-        return new RentalCard(rentalCardId, member, RENT_AVAILABLE);
-    }
-
-    public void rentItem(RentalItem item) {
-        this.rentalItems.add(item);
-    }
-
-    public void returnItem(RentalItem item) {
-        rentalItems.remove(item);
+    private void addReturnItem(RentalItem item) {
+//        rentalItems.remove(item);
         returnItems.add(ReturnItem.create(item));
+    }
+
+    private void validateStatus() {
+        if(status.equals(RENT_UNAVAILABLE)) {
+            throw new IllegalArgumentException("Unavailable for rental");
+        }
+    }
+
+    /**
+     * Create RentalCard
+     * @param member
+     */
+    public static RentalCard create(Member member) {
+        return new RentalCard(
+                RentalCardId.create(),
+                member,
+                RENT_AVAILABLE,
+                LateFee.create()
+        );
+    }
+
+    public RentalCard rentItem(Item item) {
+        validateStatus();
+        rentalItems.rentalItem(item);
+        return this;
     }
 }
