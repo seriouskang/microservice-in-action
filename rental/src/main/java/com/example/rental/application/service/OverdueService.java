@@ -1,6 +1,6 @@
 package com.example.rental.application.service;
 
-import com.example.rental.application.port.in.SubmitUsecase;
+import com.example.rental.application.port.in.OverdueUsecase;
 import com.example.rental.application.port.out.RentalCardOutputPort;
 import com.example.rental.domain.model.RentalCard;
 import com.example.rental.domain.model.vo.Item;
@@ -10,24 +10,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SubmitService implements SubmitUsecase {
+public class OverdueService implements OverdueUsecase {
     private final RentalCardOutputPort rentalCardOutputPort;
 
     @Override
-    public RentalCardOutputDTO submit(UserItemInputDTO submitDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(submitDTO.userId())
+    public RentalCardOutputDTO overdue(UserItemInputDTO rentalDTO) {
+        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(rentalDTO.userId())
                 .orElseThrow(() -> new IllegalArgumentException("Rental card is not exist"));
 
-        Item submitItem = new Item(submitDTO.itemId(), submitDTO.itemTitle());
-        RentalCard submittedRentalCard = rentalCard.submit(submitItem, LocalDate.now());
+        Item overduedItem = new Item(rentalDTO.itemId(), rentalDTO.itemTitle());
+        RentalCard overduedRentalCard = rentalCard.configOverdue(overduedItem);
 
-        rentalCardOutputPort.save(submittedRentalCard);     // JPA 사용 시, dirty checking으로 삭제해도 무방
+        rentalCardOutputPort.save(overduedRentalCard);      // JPA 사용 시, dirty checking으로 삭제해도 무방
 
-        return RentalCardOutputDTO.of(submittedRentalCard);
+        return RentalCardOutputDTO.of(overduedRentalCard);
     }
 }
