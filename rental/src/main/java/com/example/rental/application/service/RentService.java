@@ -19,10 +19,10 @@ public class RentService implements RentUsecase {
     private final RentalCardOutputPort rentalCardOutputPort;
 
     @Override
-    public RentalCardOutputDTO rent(UserItemInputDTO rental) {
-        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(rental.userId())
-                .orElseGet(() -> RentalCard.create(new User(rental.userId(), rental.userName())));
-        Item item = new Item(rental.itemId(), rental.itemTitle());
+    public RentalCardOutputDTO rent(UserItemInputDTO rentalDTO) {
+        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(rentalDTO.userId())
+                .orElseGet(() -> RentalCard.create(new User(rentalDTO.userId(), rentalDTO.userName())));
+        Item item = new Item(rentalDTO.itemId(), rentalDTO.itemTitle());
 
         rentalCard.rent(item);
         RentalCard saved = rentalCardOutputPort.save(rentalCard);   // JPA 사용 시, dirty checking으로 삭제해도 무방
