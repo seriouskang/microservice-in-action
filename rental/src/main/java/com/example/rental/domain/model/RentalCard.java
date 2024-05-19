@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.example.rental.domain.model.vo.RentStatus.*;
 
@@ -114,6 +115,14 @@ public class RentalCard {
 
     public long overduedCount() {
         return rentalItems.overduedCount();
+    }
+
+    public List<RentalItem> rentalItems() {
+        return rentalItems.rentalItems();
+    }
+
+    public List<SubmitItem> submitItems() {
+        return submitItems.submitItems();
     }
 
     private void validateChangeStatus(long point) {

@@ -14,7 +14,7 @@ public class RentalItem {
 
     private final Item item;
     private final LocalDate rentalDate;
-    private final LocalDate expectedReturnDate;
+    private final LocalDate expectedSubmitDate;
     private boolean overdued;
 
     public static RentalItem create(Item item) {
@@ -29,9 +29,21 @@ public class RentalItem {
         return item;
     }
 
+    public LocalDate rentalDate() {
+        return rentalDate;
+    }
+
+    public long id() {
+        return item.id();
+    }
+
+    public String title() {
+        return item.title();
+    }
+
     public long calculateFee(LocalDate submitDate) {
-        if(submitDate.isAfter(expectedReturnDate)) {
-            return Period.between(expectedReturnDate, submitDate).getDays() * POINT_UNIT;
+        if(submitDate.isAfter(expectedSubmitDate)) {
+            return Period.between(expectedSubmitDate, submitDate).getDays() * POINT_UNIT;
         }
 
         return 0L;
@@ -43,5 +55,9 @@ public class RentalItem {
 
     public boolean overdued() {
         return overdued;
+    }
+
+    public LocalDate expectedSubmitDate() {
+        return expectedSubmitDate;
     }
 }

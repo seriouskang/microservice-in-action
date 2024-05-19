@@ -28,6 +28,10 @@ public class RentalItems {
         }
     }
 
+    public List<RentalItem> rentalItems() {
+        return rentalItems;
+    }
+
     private RentalItem rentalItemOf(Item item) {
         return rentalItems.stream()
                 .filter(i -> i.item().equals(item))

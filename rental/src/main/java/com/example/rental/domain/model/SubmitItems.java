@@ -23,4 +23,8 @@ public class SubmitItems {
     public int submitCount() {
         return submitItems.size();
     }
+
+    public List<SubmitItem> submitItems() {
+        return submitItems;
+    }
 }
