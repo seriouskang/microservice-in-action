@@ -4,7 +4,11 @@ import com.example.rental.domain.model.vo.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.rental.domain.model.vo.RentStatus.*;
@@ -14,26 +18,36 @@ import static com.example.rental.domain.model.vo.RentStatus.*;
  */
 @Slf4j
 public class RentalCard {
+    @EmbeddedId
     private final RentalCardId rentalCardId;
+    @Embedded
     private final User user;
     @Getter
     private RentStatus status;
+    @Embedded
     private LateFee lateFee;
-    private RentalItems rentalItems;
-    private SubmitItems submitItems;
+    @ElementCollection
+    private List<RentalItem> rentalItems;
+    @ElementCollection
+    private List<SubmitItem> submitItems;
+
+    private static final int MAX_RENTAL_COUNT = 5;
 
     private RentalCard(RentalCardId rentalCardId, User user, RentStatus status, LateFee lateFee) {
         this.rentalCardId = rentalCardId;
         this.user = user;
         this.status = status;
         this.lateFee = lateFee;
-        this.rentalItems = new RentalItems();
-        this.submitItems = new SubmitItems();
+        this.rentalItems = new ArrayList<>();
+        this.submitItems = new ArrayList<>();
     }
 
     private void validateRentStatus() {
         if(status.equals(RENT_UNAVAILABLE)) {
             throw new IllegalStateException("Unavailable for rental");
+        }
+        if(rentalItems.size() > MAX_RENTAL_COUNT) {
+            throw new IllegalStateException("Exceed maximum number of rentals");
         }
     }
 
@@ -65,16 +79,24 @@ public class RentalCard {
         );
     }
 
+    private void addItem(Item item) {
+        rentalItems.add(RentalItem.create(item));
+    }
+
+    private void removeItem(RentalItem item) {
+        rentalItems.remove(item);
+    }
+
     public RentalCard rent(Item item) {
         validateRentStatus();
-        rentalItems.rent(item);
+        addItem(item);
         return this;
     }
 
     public RentalCard submit(Item item, LocalDate submitDate) {
-        lateFee = lateFee.addPoint(rentalItems.latePointOf(item, submitDate));
-        RentalItem submitted = rentalItems.remove(item);
-        submitItems.add(submitted);
+        lateFee = lateFee.addPoint(latePointOf(item, submitDate));
+        RentalItem submitted = remove(item);
+        submitItems.add(SubmitItem.create(submitted));
 
         return this;
     }
@@ -85,7 +107,7 @@ public class RentalCard {
 
     // @TODO: validate expectedReturnDate
     public RentalCard configOverdue(Item item) {
-        rentalItems.configOverdue(item);
+        rentalItemOf(item).changeOverdued(true);
         status = RENT_UNAVAILABLE;
 
         return this;
@@ -106,29 +128,49 @@ public class RentalCard {
     }
 
     public int rentalCount() {
-        return rentalItems.rentalCount();
+        return rentalItems.size();
     }
 
     public int submitCount() {
-        return submitItems.submitCount();
+        return submitItems.size();
     }
 
     public long overduedCount() {
-        return rentalItems.overduedCount();
+        return rentalItems.stream()
+                .filter(rentalItem -> rentalItem.overdued())
+                .count();
     }
 
     public List<RentalItem> rentalItems() {
-        return rentalItems.rentalItems();
+        return rentalItems;
     }
 
     public List<SubmitItem> submitItems() {
-        return submitItems.submitItems();
+        return submitItems;
     }
 
     private void validateChangeStatus(long point) {
-        if(rentalItems.rentalCount() > 0) {
+        if(rentalCount() > 0) {
             throw new IllegalStateException("Have items to rent");
         }
         lateFee.validatePoint(point);
+    }
+
+    public Long latePointOf(Item item, LocalDate submitDate) {
+        return rentalItemOf(item)
+                .calculateFee(submitDate);
+    }
+
+    private RentalItem rentalItemOf(Item item) {
+        return rentalItems.stream()
+                .filter(i -> i.item().equals(item))
+                .findFirst()
+                .get();
+    }
+
+    private RentalItem remove(Item item) {
+        RentalItem rentalItem = rentalItemOf(item);
+        removeItem(rentalItem);
+        return rentalItem;
     }
 }

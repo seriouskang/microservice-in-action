@@ -1,11 +1,17 @@
 package com.example.rental.domain.model.vo;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
+import javax.persistence.Embeddable;
+
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class User {
-    private final Long id;
-    private final String name;
+    private Long id;
+    private String name;
 
     public long id() {
         return id;
