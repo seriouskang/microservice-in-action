@@ -1,4 +1,4 @@
-package com.example.rental.application.usecase;
+package com.example.rental.application.port.in;
 
 import com.example.rental.framework.httpadapter.dto.ClearOverdueInfoDTO;
 import com.example.rental.framework.httpadapter.dto.RentalResultOutputDTO;

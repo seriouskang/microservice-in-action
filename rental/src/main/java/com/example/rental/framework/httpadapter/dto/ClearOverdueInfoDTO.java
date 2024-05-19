@@ -7,4 +7,12 @@ public class ClearOverdueInfoDTO {
     private final long userId;
     private final String userName;
     private final long point;
+
+    public long userId() {
+        return userId;
+    }
+
+    public long point() {
+        return point;
+    }
 }

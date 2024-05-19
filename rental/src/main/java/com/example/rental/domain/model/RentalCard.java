@@ -90,7 +90,7 @@ public class RentalCard {
         return this;
     }
 
-    public Long changeStatus(long point) {
+    public Long changeStatusToAvailable(long point) {
         validateChangeStatus(point);
         lateFee.deductPoint(point);
 
