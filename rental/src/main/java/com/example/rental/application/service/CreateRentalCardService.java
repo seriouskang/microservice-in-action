@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CreateRentalService implements CreateRentalCardUsecase {
+public class CreateRentalCardService implements CreateRentalCardUsecase {
     private final RentalCardOutputPort rentalCardOutputPort;
 
     @Override
