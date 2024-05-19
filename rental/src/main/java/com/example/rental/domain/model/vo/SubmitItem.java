@@ -2,14 +2,20 @@ package com.example.rental.domain.model.vo;
 
 import com.example.rental.domain.model.RentalItem;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.time.LocalDate;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SubmitItem {
-    private final RentalItem item;
-    private final LocalDate submitDate;
+    @Embedded
+    private RentalItem item;
+    private LocalDate submitDate;
 
     public static SubmitItem create(RentalItem item) {
         return new SubmitItem(item, LocalDate.now());

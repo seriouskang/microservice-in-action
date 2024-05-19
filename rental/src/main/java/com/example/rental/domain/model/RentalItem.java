@@ -3,18 +3,24 @@ package com.example.rental.domain.model;
 import com.example.rental.domain.model.vo.Item;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.time.LocalDate;
 import java.time.Period;
 
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalItem {
     private static final long RENTAL_DATE = 14;
     private static final long POINT_UNIT = 10;
 
-    private final Item item;
-    private final LocalDate rentalDate;
-    private final LocalDate expectedSubmitDate;
+    @Embedded
+    private Item item;
+    private LocalDate rentalDate;
+    private LocalDate expectedSubmitDate;
     private boolean overdued;
 
     public static RentalItem create(Item item) {
