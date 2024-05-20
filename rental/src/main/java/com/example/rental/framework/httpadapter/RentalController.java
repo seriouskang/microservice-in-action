@@ -2,6 +2,7 @@ package com.example.rental.framework.httpadapter;
 
 import com.example.rental.application.port.in.*;
 import com.example.rental.framework.httpadapter.dto.*;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/rental")
 @RequiredArgsConstructor
+@Api(tags = {"대여 컨트롤러"})
 public class RentalController {
     private final RentUsecase rentUsecase;
     private final SubmitUsecase submitUsecase;
