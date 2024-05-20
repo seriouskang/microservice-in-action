@@ -10,11 +10,11 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class User {
-    private Long id;
+    private Long userId;
     private String name;
 
-    public long id() {
-        return id;
+    public long userId() {
+        return userId;
     }
 
     public String name() {

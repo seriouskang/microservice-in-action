@@ -40,11 +40,11 @@ public class RentalItem {
     }
 
     public long id() {
-        return item.id();
+        return item.itemId();
     }
 
     public String title() {
-        return item.title();
+        return item.itemTitle();
     }
 
     public long calculateFee(LocalDate submitDate) {

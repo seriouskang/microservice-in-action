@@ -57,11 +57,11 @@ public class RentalCard {
     }
 
     public String rentalCardId() {
-        return rentalCardId.id();
+        return rentalCardId.cardId();
     }
 
     public long userId() {
-        return user.id();
+        return user.userId();
     }
 
     public String userName() {

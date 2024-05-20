@@ -10,14 +10,14 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Item {
-    private Long id;
-    private String title;
+    private Long itemId;
+    private String itemTitle;
 
-    public long id() {
-        return id;
+    public long itemId() {
+        return itemId;
     }
 
-    public String title() {
-        return title;
+    public String itemTitle() {
+        return itemTitle;
     }
 }
