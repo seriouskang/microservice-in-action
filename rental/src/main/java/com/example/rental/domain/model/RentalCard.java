@@ -1,12 +1,15 @@
 package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +20,13 @@ import static com.example.rental.domain.model.vo.RentStatus.*;
  * Aggregate
  */
 @Slf4j
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RentalCard {
     @EmbeddedId
-    private final RentalCardId rentalCardId;
+    private RentalCardId rentalCardId;
     @Embedded
-    private final User user;
+    private User user;
     @Getter
     private RentStatus status;
     @Embedded
