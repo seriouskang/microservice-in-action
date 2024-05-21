@@ -1,8 +1,10 @@
 package com.example.rental.framework.httpadapter.dto;
 
 import com.example.rental.domain.model.RentalCard;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public class RentalResultOutputDTO {
     private final long userId;

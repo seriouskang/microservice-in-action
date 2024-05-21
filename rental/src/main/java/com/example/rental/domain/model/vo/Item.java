@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Embeddable;
 
+@EqualsAndHashCode
 @Embeddable
 @Getter
 @Setter
@@ -12,12 +13,4 @@ import javax.persistence.Embeddable;
 public class Item {
     private Long itemId;
     private String itemTitle;
-
-    public long itemId() {
-        return itemId;
-    }
-
-    public String itemTitle() {
-        return itemTitle;
-    }
 }

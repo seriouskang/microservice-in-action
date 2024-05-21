@@ -1,10 +1,12 @@
 package com.example.rental.framework.httpadapter.dto;
 
 import com.example.rental.domain.model.RentalItem;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 
+@Getter
 @RequiredArgsConstructor
 public class RentalItemOutputDTO {
     private final long id;
@@ -17,9 +19,9 @@ public class RentalItemOutputDTO {
         return new RentalItemOutputDTO(
                 rentalItem.id(),
                 rentalItem.title(),
-                rentalItem.rentalDate(),
-                rentalItem.overdued(),
-                rentalItem.expectedSubmitDate()
+                rentalItem.getRentalDate(),
+                rentalItem.isOverdued(),
+                rentalItem.getExpectedSubmitDate()
         );
     }
 }

@@ -31,20 +31,12 @@ public class RentalItem {
         return LocalDate.now().plusDays(RENTAL_DATE);
     }
 
-    public Item item() {
-        return item;
-    }
-
-    public LocalDate rentalDate() {
-        return rentalDate;
-    }
-
     public long id() {
-        return item.itemId();
+        return item.getItemId();
     }
 
     public String title() {
-        return item.itemTitle();
+        return item.getItemTitle();
     }
 
     public long calculateFee(LocalDate submitDate) {
@@ -57,13 +49,5 @@ public class RentalItem {
 
     public void changeOverdued(boolean overdued) {
         this.overdued = overdued;
-    }
-
-    public boolean overdued() {
-        return overdued;
-    }
-
-    public LocalDate expectedSubmitDate() {
-        return expectedSubmitDate;
     }
 }

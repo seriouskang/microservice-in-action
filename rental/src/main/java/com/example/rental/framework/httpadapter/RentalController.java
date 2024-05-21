@@ -57,4 +57,25 @@ public class RentalController {
         return ResponseEntity
                 .ok(rentalCardOutputDTO);
     }
+
+    @PostMapping("/submit")
+    public ResponseEntity<RentalCardOutputDTO> submit(@RequestBody UserItemInputDTO userItemInputDTO) {
+        RentalCardOutputDTO rentalCardOutputDTO = submitUsecase.submit(userItemInputDTO);
+        return ResponseEntity
+                .ok(rentalCardOutputDTO);
+    }
+
+    @PostMapping("/overdue")
+    public ResponseEntity<RentalCardOutputDTO> overdue(@RequestBody UserItemInputDTO userItemInputDTO) {
+        RentalCardOutputDTO rentalCardOutputDTO = overdueUsecase.overdue(userItemInputDTO);
+        return ResponseEntity
+                .ok(rentalCardOutputDTO);
+    }
+
+    @PostMapping("/clearoverdue")
+    public ResponseEntity<RentalResultOutputDTO> clearOverDue(@RequestBody ClearOverdueInfoDTO clearOverdueInfoDTO) {
+        RentalResultOutputDTO rentalResultOutputDTO = clearOverdueUsecase.clearOverdue(clearOverdueInfoDTO);
+        return ResponseEntity
+                .ok(rentalResultOutputDTO);
+    }
 }

@@ -2,8 +2,10 @@ package com.example.rental.framework.httpadapter.dto;
 
 import com.example.rental.domain.model.RentalCard;
 import com.example.rental.domain.model.vo.RentStatus;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public class RentalCardOutputDTO {
     private final String rentalCardId;

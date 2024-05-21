@@ -17,13 +17,13 @@ public class InquiryService implements InquiryUsecase {
 
     @Override
     public Optional<RentalCardOutputDTO> getRentalCard(UserInputDTO userInputDTO) {
-        return rentalCardOutputPort.loadRentalCard(userInputDTO.id())
+        return rentalCardOutputPort.loadRentalCard(userInputDTO.getId())
                 .map(RentalCardOutputDTO::of);
     }
 
     @Override
     public Optional<List<RentalItemOutputDTO>> getAllRentalItems(UserInputDTO userInputDTO) {
-        return rentalCardOutputPort.loadRentalCard(userInputDTO.id())
+        return rentalCardOutputPort.loadRentalCard(userInputDTO.getId())
                 .map(loadedCard -> loadedCard.rentalItems()
                         .stream()
                         .map(RentalItemOutputDTO::of)
@@ -32,7 +32,7 @@ public class InquiryService implements InquiryUsecase {
 
     @Override
     public Optional<List<SubmitItemOutputDTO>> getAllSubmitItems(UserInputDTO userInputDTO) {
-        return rentalCardOutputPort.loadRentalCard(userInputDTO.id())
+        return rentalCardOutputPort.loadRentalCard(userInputDTO.getId())
                 .map(loadedCard -> loadedCard.submitItems()
                         .stream()
                         .map(SubmitItemOutputDTO::of)

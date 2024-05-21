@@ -20,10 +20,10 @@ public class SubmitService implements SubmitUsecase {
 
     @Override
     public RentalCardOutputDTO submit(UserItemInputDTO submitDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(submitDTO.userId())
+        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(submitDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Rental card is not exist"));
 
-        Item submitItem = new Item(submitDTO.itemId(), submitDTO.itemTitle());
+        Item submitItem = new Item(submitDTO.getItemId(), submitDTO.getItemTitle());
         RentalCard submittedRentalCard = rentalCard.submit(submitItem, LocalDate.now());
 
         rentalCardOutputPort.save(submittedRentalCard);     // JPA 사용 시, dirty checking으로 삭제해도 무방

@@ -19,10 +19,10 @@ public class OverdueService implements OverdueUsecase {
 
     @Override
     public RentalCardOutputDTO overdue(UserItemInputDTO rentalDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(rentalDTO.userId())
+        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(rentalDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Rental card is not exist"));
 
-        Item overduedItem = new Item(rentalDTO.itemId(), rentalDTO.itemTitle());
+        Item overduedItem = new Item(rentalDTO.getItemId(), rentalDTO.getItemTitle());
         RentalCard overduedRentalCard = rentalCard.configOverdue(overduedItem);
 
         rentalCardOutputPort.save(overduedRentalCard);      // JPA 사용 시, dirty checking으로 삭제해도 무방

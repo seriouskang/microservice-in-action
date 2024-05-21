@@ -141,7 +141,7 @@ public class RentalCard {
 
     public long overduedCount() {
         return rentalItems.stream()
-                .filter(rentalItem -> rentalItem.overdued())
+                .filter(RentalItem::isOverdued)
                 .count();
     }
 
@@ -167,7 +167,7 @@ public class RentalCard {
 
     private RentalItem rentalItemOf(Item item) {
         return rentalItems.stream()
-                .filter(i -> i.item().equals(item))
+                .filter(i -> i.getItem().equals(item))
                 .findFirst()
                 .get();
     }
