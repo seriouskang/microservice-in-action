@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface RentalCardRepository extends JpaRepository<RentalCard, RentalCardId> {
-    @Query("select m from RentalCard m where m.user.id = :id")
+    @Query("select m from RentalCard m where m.user.userId = :id")
     Optional<RentalCard> findByUserId(@Param("id") Long userId);
 
-    @Query("select m from RentalCard m where m.rentalCardId.id = :id")
+    @Query("select m from RentalCard m where m.rentalCardId.cardId = :id")
     Optional<RentalCard> findByRentalCardId(@Param("id") String rentalCardId);
 }

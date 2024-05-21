@@ -1,9 +1,7 @@
 package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.ElementCollection;
@@ -21,6 +19,7 @@ import static com.example.rental.domain.model.vo.RentStatus.*;
  */
 @Slf4j
 @Entity
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RentalCard {
     @EmbeddedId

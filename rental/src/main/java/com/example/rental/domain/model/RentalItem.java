@@ -1,9 +1,7 @@
 package com.example.rental.domain.model;
 
 import com.example.rental.domain.model.vo.Item;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -11,6 +9,8 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Embeddable
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalItem {

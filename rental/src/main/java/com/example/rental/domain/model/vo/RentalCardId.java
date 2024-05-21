@@ -1,8 +1,6 @@
 package com.example.rental.domain.model.vo;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -10,6 +8,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Embeddable
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalCardId implements Serializable {

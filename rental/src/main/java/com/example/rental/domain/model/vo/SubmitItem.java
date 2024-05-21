@@ -1,15 +1,15 @@
 package com.example.rental.domain.model.vo;
 
 import com.example.rental.domain.model.RentalItem;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.time.LocalDate;
 
 @Embeddable
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SubmitItem {
