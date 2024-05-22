@@ -18,10 +18,10 @@ public class ClearOverdueService implements ClearOverdueUsecase {
 
     @Override
     public RentalResultOutputDTO clearOverdue(ClearOverdueInfoDTO clearOverdueInfoDTO) {
-        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(clearOverdueInfoDTO.userId())
+        RentalCard rentalCard = rentalCardOutputPort.loadRentalCard(clearOverdueInfoDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Rental card is not exist"));
 
-        rentalCard.changeStatusToAvailable(clearOverdueInfoDTO.point());
+        rentalCard.changeStatusToAvailable(clearOverdueInfoDTO.getPoint());
 
         rentalCardOutputPort.save(rentalCard);      // JPA 사용 시, dirty checking으로 삭제해도 무방
 
