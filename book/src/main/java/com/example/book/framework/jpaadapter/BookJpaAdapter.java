@@ -7,16 +7,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class BookAdapter implements BookOutputPort {
-    private final BookRepository bookRepository;
+public class BookJpaAdapter implements BookOutputPort {
+    private final BookJpaRepository bookJpaRepository;
 
     @Override
     public Book findById(long id) {
-        return bookRepository.findById(id).get();
+        return bookJpaRepository.findById(id).get();
     }
 
     @Override
     public Book save(Book book) {
-        return bookRepository.save(book);
+        return bookJpaRepository.save(book);
     }
 }
