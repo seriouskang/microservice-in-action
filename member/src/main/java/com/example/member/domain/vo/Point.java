@@ -1,8 +1,14 @@
 package com.example.member.domain.vo;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
 
 @Getter
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Point {
     private Long point;
 

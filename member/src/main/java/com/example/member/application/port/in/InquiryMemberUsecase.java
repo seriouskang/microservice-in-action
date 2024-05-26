@@ -3,5 +3,5 @@ package com.example.member.application.port.in;
 import com.example.member.framework.httpadapter.dto.MemberOutputDTO;
 
 public interface InquiryMemberUsecase {
-    MemberOutputDTO findById(long id);
+    MemberOutputDTO findByMemberNo(long no);
 }

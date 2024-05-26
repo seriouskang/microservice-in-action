@@ -1,18 +1,30 @@
 package com.example.member.domain;
 
 import com.example.member.domain.vo.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long no;
+    @Embedded
     private IdName idName;
+    @Embedded
     private Password pwd;
+    @Embedded
     private Email email;
+    @ElementCollection
     private List<Authority> authorities;
+    @Embedded
     private Point point;
 
     public Member(IdName idName, Password pwd, Email email) {

@@ -16,8 +16,8 @@ public class InquiryMemberService implements InquiryMemberUsecase {
     private final MemberOutputPort memberOutputPort;
 
     @Override
-    public MemberOutputDTO findById(long id) {
-        Member found = memberOutputPort.findById(id);
+    public MemberOutputDTO findByMemberNo(long no) {
+        Member found = memberOutputPort.findByNo(no);
         return MemberOutputDTO.of(found);
     }
 }
