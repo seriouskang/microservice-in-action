@@ -1,12 +1,21 @@
 package com.example.book.domain.model;
 
 import com.example.book.domain.model.vo.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Getter
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
+    @Embedded
     private BookDesc desc;
     private BookClassification classification;
     private BookStatus status;
