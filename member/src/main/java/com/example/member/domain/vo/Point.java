@@ -10,7 +10,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Point {
-    private Long point;
+    private Long point = 0L;
 
     public long add(long point) {
         this.point += point;

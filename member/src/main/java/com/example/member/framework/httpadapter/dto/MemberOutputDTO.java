@@ -3,7 +3,9 @@ package com.example.member.framework.httpadapter.dto;
 import com.example.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberOutputDTO {
     private Long id;
