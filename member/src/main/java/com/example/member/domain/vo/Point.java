@@ -1,5 +1,8 @@
 package com.example.member.domain.vo;
 
+import lombok.Getter;
+
+@Getter
 public class Point {
     private Long point;
 

@@ -1,10 +1,12 @@
 package com.example.member.domain;
 
 import com.example.member.domain.vo.*;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Member {
     private Long id;
     private IdName idName;
@@ -13,7 +15,7 @@ public class Member {
     private List<Authority> authorities;
     private Point point;
 
-    private Member(IdName idName, Password pwd, Email email) {
+    public Member(IdName idName, Password pwd, Email email) {
         this.idName = idName;
         this.pwd = pwd;
         this.email = email;
