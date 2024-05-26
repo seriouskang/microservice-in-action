@@ -1,7 +1,9 @@
 package com.example.book.domain.model;
 
 import com.example.book.domain.model.vo.*;
+import lombok.Getter;
 
+@Getter
 public class Book {
     private long id;
     private String title;
