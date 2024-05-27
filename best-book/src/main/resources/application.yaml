@@ -5,21 +5,17 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  datasource:
-    url: jdbc:h2:mem:memdb
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+  data:
+    mongodb:
+      host: 192.168.64.78
+      port: 27017
+      database: test
   jpa:
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
         format_sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
 
 logging:
   level:
