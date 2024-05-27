@@ -36,6 +36,30 @@ public class BestBookService {
         save(found);
     }
 
+    public boolean delete(String id) {
+        Optional<BestBook> found = bestBookRepository.findById(id);
+
+        if(found.isPresent()) {
+            bestBookRepository.delete(found.get());
+            return true;
+        }
+        return false;
+    }
+
+    public BestBook update(String id, BestBook bestBook) {
+        Optional<BestBook> found = bestBookRepository.findById(id);
+
+        if(found.isPresent()) {
+            BestBook foundBestBook = found.get();
+            foundBestBook.setItem(bestBook.getItem());
+            foundBestBook.setRentCount(bestBook.getRentCount());
+
+            return bestBookRepository.save(foundBestBook);
+        }
+
+        return null;
+    }
+
     public BestBook save(BestBook bestBook) {
         return bestBookRepository.save(bestBook);
     }
