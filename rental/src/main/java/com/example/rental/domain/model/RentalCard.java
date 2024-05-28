@@ -1,5 +1,8 @@
 package com.example.rental.domain.model;
 
+import com.example.rental.domain.model.event.ItemRented;
+import com.example.rental.domain.model.event.ItemSubmitted;
+import com.example.rental.domain.model.event.OverdueCleared;
 import com.example.rental.domain.model.vo.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -176,5 +179,17 @@ public class RentalCard {
         RentalItem rentalItem = rentalItemOf(item);
         removeItem(rentalItem);
         return rentalItem;
+    }
+
+    public static ItemRented createItemRentedEvent(User user, Item item, long point) {
+        return new ItemRented(user, item, point);
+    }
+
+    public static ItemSubmitted createItemSubmittedEvent(User user, Item item, long point) {
+        return new ItemSubmitted(user, item, point);
+    }
+
+    public static OverdueCleared createOverdueClearedEvent(User user, long point) {
+        return new OverdueCleared(user, point);
     }
 }
