@@ -1,8 +1,10 @@
 package com.example.rental.application.service;
 
 import com.example.rental.application.port.in.SubmitUsecase;
+import com.example.rental.application.port.out.EventOutputPort;
 import com.example.rental.application.port.out.RentalCardOutputPort;
 import com.example.rental.domain.model.RentalCard;
+import com.example.rental.domain.model.event.ItemSubmitted;
 import com.example.rental.domain.model.vo.Item;
 import com.example.rental.framework.httpadapter.dto.RentalCardOutputDTO;
 import com.example.rental.framework.httpadapter.dto.UserItemInputDTO;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class SubmitService implements SubmitUsecase {
     private final RentalCardOutputPort rentalCardOutputPort;
+    private final EventOutputPort eventOutputPort;
 
     @Override
     public RentalCardOutputDTO submit(UserItemInputDTO submitDTO) {
@@ -26,6 +29,8 @@ public class SubmitService implements SubmitUsecase {
         Item submitItem = new Item(submitDTO.getItemId(), submitDTO.getItemTitle());
         RentalCard submittedRentalCard = rentalCard.submit(submitItem, LocalDate.now());
 
+        ItemSubmitted itemSubmittedEvent = RentalCard.createItemSubmittedEvent(rentalCard.getUser(), submitItem, 10L);
+        eventOutputPort.publishSubmitEvent(itemSubmittedEvent);
         rentalCardOutputPort.save(submittedRentalCard);     // JPA 사용 시, dirty checking으로 삭제해도 무방
 
         return RentalCardOutputDTO.of(submittedRentalCard);
