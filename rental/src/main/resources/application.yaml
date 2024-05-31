@@ -27,9 +27,9 @@ logging:
 
 producers:
   bootstrap-servers: localhost:9092
-  topic1:
+  topic-rent:
     name: rent
-  topic2:
+  topic-submit:
     name: submit
-  topic3:
+  topic-overdue-clear:
     name: overdue_clear
