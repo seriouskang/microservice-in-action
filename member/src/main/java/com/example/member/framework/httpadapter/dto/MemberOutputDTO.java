@@ -17,7 +17,7 @@ public class MemberOutputDTO {
     public static MemberOutputDTO of(Member member) {
         return new MemberOutputDTO(
                 member.getNo(),
-                member.getIdName().getName(),
+                member.getUser().getName(),
                 member.getPwd().getCurrentPwd(),
                 member.getEmail().getAddress(),
                 member.getPoint().getPoint()

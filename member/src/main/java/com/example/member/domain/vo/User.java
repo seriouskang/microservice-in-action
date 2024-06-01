@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class IdName {
+public class User {
     private String id;
     private String name;
 }

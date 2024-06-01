@@ -4,7 +4,7 @@ import com.example.member.application.port.in.AddMemberUsecase;
 import com.example.member.application.port.out.MemberOutputPort;
 import com.example.member.domain.Member;
 import com.example.member.domain.vo.Email;
-import com.example.member.domain.vo.IdName;
+import com.example.member.domain.vo.User;
 import com.example.member.domain.vo.Password;
 import com.example.member.framework.httpadapter.dto.MemberInfoDTO;
 import com.example.member.framework.httpadapter.dto.MemberOutputDTO;
@@ -21,10 +21,10 @@ public class AddMemberService implements AddMemberUsecase {
 
     @Override
     public MemberOutputDTO addMember(MemberInfoDTO memberInfoDTO) {
-        IdName idName = new IdName(memberInfoDTO.getId(), memberInfoDTO.getName());
+        User user = new User(memberInfoDTO.getId(), memberInfoDTO.getName());
         Password pwd = new Password(memberInfoDTO.getPassword());
         Email email = new Email(memberInfoDTO.getEmail());
-        Member member = new Member(idName, pwd, email);
+        Member member = new Member(user, pwd, email);
 
         Member saved = memberOutputPort.save(member);
         return MemberOutputDTO.of(saved);

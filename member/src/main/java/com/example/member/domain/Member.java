@@ -17,7 +17,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long no;
     @Embedded
-    private IdName idName;
+    private User user;
     @Embedded
     private Password pwd;
     @Embedded
@@ -27,8 +27,8 @@ public class Member {
     @Embedded
     private Point point;
 
-    public Member(IdName idName, Password pwd, Email email) {
-        this.idName = idName;
+    public Member(User user, Password pwd, Email email) {
+        this.user = user;
         this.pwd = pwd;
         this.email = email;
 
@@ -50,11 +50,11 @@ public class Member {
     }
 
     // @TODO
-    public Member login(IdName idName, Password pwd) {
+    public Member login(User user, Password pwd) {
         return this;
     }
 
     // @TODO
-    public void logout(IdName idName) {
+    public void logout(User user) {
     }
 }

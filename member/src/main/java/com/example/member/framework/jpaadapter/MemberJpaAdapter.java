@@ -2,7 +2,7 @@ package com.example.member.framework.jpaadapter;
 
 import com.example.member.application.port.out.MemberOutputPort;
 import com.example.member.domain.Member;
-import com.example.member.domain.vo.IdName;
+import com.example.member.domain.vo.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +22,7 @@ public class MemberJpaAdapter implements MemberOutputPort {
     }
 
     @Override
-    public Member findByIdName(IdName idName) {
-        return memberJpaRepository.findByIdName(idName).get();
+    public Member findByIdName(User user) {
+        return memberJpaRepository.findByIdName(user).get();
     }
 }
