@@ -24,3 +24,11 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+
+consumer:
+  topic-rent:
+    name: rent
+  topic-submit:
+    name: submit
+  group-id:
+    name: book
