@@ -36,7 +36,7 @@ public class RentalKafkaProducer implements EventOutputPort {
 
                     @Override
                     public void onFailure(Throwable ex) {
-                        log.info("Fail to publish item rent event. itemRented = {}", itemRented);
+                        log.error("Fail to publish item rent event. itemRented = {}", itemRented);
                     }
                 });
     }
@@ -53,7 +53,7 @@ public class RentalKafkaProducer implements EventOutputPort {
 
                     @Override
                     public void onFailure(Throwable ex) {
-                        log.info("Fail to publish item submit event. itemSubmitted = {}", itemSubmitted);
+                        log.error("Fail to publish item submit event. itemSubmitted = {}", itemSubmitted);
                     }
                 });
     }
@@ -70,7 +70,7 @@ public class RentalKafkaProducer implements EventOutputPort {
 
                     @Override
                     public void onFailure(Throwable ex) {
-                        log.info("Fail to publish overdue clear event. overdueCleared = {}", overdueCleared);
+                        log.error("Fail to publish overdue clear event. overdueCleared = {}", overdueCleared);
                     }
                 });
     }
