@@ -24,3 +24,13 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+
+consumer:
+  topic-rent:
+    name: rent
+  topic-submit:
+    name: submit
+  topic-overdue-clear:
+    name: overdue_clear
+  group-id:
+    name: member
