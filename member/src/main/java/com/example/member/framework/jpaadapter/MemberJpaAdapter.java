@@ -22,7 +22,7 @@ public class MemberJpaAdapter implements MemberOutputPort {
     }
 
     @Override
-    public Member findByIdName(User user) {
-        return memberJpaRepository.findByIdName(user).get();
+    public Member findByUser(User user) {
+        return memberJpaRepository.findByUser(user).get();
     }
 }

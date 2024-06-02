@@ -18,7 +18,7 @@ public class UsePointService implements UsePointUsecase {
 
     @Override
     public MemberOutputDTO usePoint(User user, long point) {
-        Member found = memberOutputPort.findByIdName(user);
+        Member found = memberOutputPort.findByUser(user);
         found.usePoint(point);
 
         return MemberOutputDTO.of(found);

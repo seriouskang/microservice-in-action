@@ -6,5 +6,5 @@ import com.example.member.domain.vo.User;
 public interface MemberOutputPort {
     Member save(Member member);
     Member findByNo(long no);
-    Member findByIdName(User user);
+    Member findByUser(User user);
 }

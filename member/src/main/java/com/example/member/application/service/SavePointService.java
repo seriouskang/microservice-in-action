@@ -18,7 +18,7 @@ public class SavePointService implements SavePointUsecase {
 
     @Override
     public MemberOutputDTO savePoint(User user, Long point) {
-        Member found = memberOutputPort.findByIdName(user);
+        Member found = memberOutputPort.findByUser(user);
         found.addPoint(point);
 
         return MemberOutputDTO.of(found);
